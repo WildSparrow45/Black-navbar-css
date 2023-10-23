@@ -1,0 +1,156 @@
+@use "_colors.scss" as mycolor;
+
+@mixin custom-flex(
+  $flex-direction: row,
+  $justify-content: "",
+  $align-items: ""
+) {
+  display: flex;
+  flex-direction: $flex-direction;
+  flex-wrap: wrap;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin custom-hover($textcolor, $bg-color) {
+  background-color: $bg-color;
+  color: $textcolor;
+  fill: $textcolor;
+}
+
+.custom-main-nav {
+  @include custom-flex(row, space-around, center);
+  background-color: mycolor.$nav-bg-color;
+  box-sizing: border-box;
+  width: 100%;
+
+  .custom-brand {
+    box-sizing: content-box;
+
+    h1 {
+      color: mycolor.$nav-color;
+      height: auto;
+      transition: all ease 0.7s;
+      padding: 10px 10px;
+      font-size: 24px;
+      margin: 0px;
+
+      &:hover {
+        font-weight: 700;
+        @include custom-hover(
+          mycolor.$hover-nav-color,
+          mycolor.$hover-nav-bg-color
+        );
+      }
+    }
+  }
+
+  .custom-menu-nav {
+    a {
+      color: mycolor.$nav-color;
+      text-decoration: none;
+      padding: 14px 20px;
+      transition: all ease 0.7s;
+
+      &:hover {
+        font-weight: 700;
+        @include custom-hover(
+          mycolor.$hover-nav-color,
+          mycolor.$hover-nav-bg-color
+        );
+      }
+    }
+  }
+
+  .custom-nav-search {
+    @include custom-flex(row, space-around, center);
+    height: auto;
+    box-sizing: border-box;
+
+    input[type="text"],
+    input[type="text"]:active,
+    input[type="text"]:focus {
+      height: 24px;
+      outline: none;
+    }
+    button {
+      background-color: mycolor.$nav-bg-color;
+      height: 24px;
+      padding: 0px 5px;
+      margin: auto 10px;
+      &:hover {
+        @include custom-hover(
+          mycolor.$hover-nav-color,
+          mycolor.$hover-nav-bg-color
+        );
+        svg {
+          fill: black;
+        }
+      }
+      &:active {
+        background-color: brown;
+
+        svg {
+          fill: rgb(9, 255, 202);
+          background-color: brown;
+        }
+      }
+      .Bisearch {
+        fill: mycolor.$nav-color;
+      }
+    }
+  }
+  .custom-nav-toogle-button {
+    display: none;
+    button {
+      padding: 4px 14px 4px;
+      color: mycolor.$nav-color;
+      background-color: mycolor.$nav-bg-color;
+      border-radius: 5px;
+      transition: background-color 0.5s ease-in-out, Color 0.7s ease-in-out;
+
+      &:hover {
+        @include custom-hover(
+          mycolor.$hover-nav-color,
+          mycolor.$hover-nav-bg-color
+        );
+      }
+    }
+  }
+}
+
+// toggle-button
+@media only screen and (min-width: 0px) and (max-width: 992px) {
+  .custom-main-nav {
+    @include custom-flex(row, space-around, center);
+    background-color: mycolor.$nav-bg-color;
+    width: 100%;
+    padding: 10px;
+    .custom-brand {
+      h1 {
+        color: mycolor.$nav-color;
+        height: auto;
+        transition: all ease 0.7s;
+        padding: 10px 10px;
+      }
+    }
+
+    .custom-menu-nav {
+      width: 100%;
+      margin-left: 20px;
+      @include custom-flex(column, space-around, flex-start);
+    }
+
+    .custom-nav-search {
+      @include custom-flex(row, flex-start, flex-start);
+      width: 100%;
+      margin: 8px 0px 30px 20px;
+    }
+    .custom-nav-toogle-button {
+      display: block;
+    }
+  }
+  .dis-none {
+    display: none !important;
+  }
+}
